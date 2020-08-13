@@ -1,6 +1,6 @@
 <table>
   <thead>
-    <th>Slot Number</th>
+    <th>Park Lot Number</th>
     <th>Plate Number</th>
     <th>Color</th>
     <th>Status</th>
@@ -11,7 +11,12 @@
       <td><%= index + 1 %></td>
       <td><%= parking_lot.plate_number %></td>
       <td><%= parking_lot.color %></td>
-      <td><%= parking_lot.available? ? 'Available' : 'Parked' %></td>
+      <td>
+        <%= parking_lot.available? ? 'Available' : 'Parked' %>
+        <% if !parking_lot.available? %>
+          | <%= link_to 'Car Leave', leave_parking_lot_parking_lot_path(parking_lot), method: :post %>
+        <% end %>
+      </td>
     </tr>
     <% end %>
   </tbody>

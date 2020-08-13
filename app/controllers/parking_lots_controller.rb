@@ -3,7 +3,8 @@ class ParkingLotsController < ApplicationController
   def create
     total_parking_lots = params[:total_parking_lots]
     for i in 1..total_parking_lots.to_i
-      ParkingLot.create
+      parking_lot = ParkingLot.new
+      parking_lot.save(validate: false)
     end
     redirect_to root_path, notice: "New Parking Lots Has Been Successfully Created"
   end
@@ -12,13 +13,27 @@ class ParkingLotsController < ApplicationController
     @parking_lot.attributes = parking_lot_params
     @parking_lot.available = false
     if @parking_lot.save
-      redirect_to request.referrer, notice: "#{@parking_lot.plate_number} with color #{@parking_lot.color} has been parked successfully."
+      redirect_to root_path, notice: "#{@parking_lot.plate_number} with color #{@parking_lot.color} has been parked successfully."
     else
-      redirect_to request.referrer, alert: "#{@parking_lot.plate_number} had already been parked."
+      duplicate_lot = ParkingLot.find_by(plate_number: @parking_lot.plate_number)
+      redirect_to request.referrer, alert: "#{@parking_lot.plate_number} had already been parked on Lot #{duplicate_lot.id}"
     end
   end
   def new_car_to_park
-    @parking_lot = ParkingLot.find(ParkingLot.available_lot)
+    if !ParkingLot.available_lot.nil?
+      @parking_lot = ParkingLot.find(ParkingLot.available_lot)
+    else
+      redirect_to root_path, alert: "Sorry, Parking Lot Is Full"
+    end
+  end
+  def leave_parking_lot
+    
+    @parking_lot = ParkingLot.find params[:id]
+    plate_number = @parking_lot.plate_number
+    @parking_lot.plate_number = @parking_lot.color = nil
+    @parking_lot.available = true
+    @parking_lot.save(validate: false)
+    redirect_to root_path, notice: "#{plate_number} has successfully leave and Parking Lot #{@parking_lot.id} is now available."
   end
   protected
   def parking_lot_params
