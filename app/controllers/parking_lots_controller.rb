@@ -11,8 +11,11 @@ class ParkingLotsController < ApplicationController
     @parking_lot = ParkingLot.find params[:id]
     @parking_lot.attributes = parking_lot_params
     @parking_lot.available = false
-    @parking_lot.save
-    redirect_to request.referrer, notice: "#{@parking_lot.plate_number} with color #{@parking_lot.color} has been parked successfully."
+    if @parking_lot.save
+      redirect_to request.referrer, notice: "#{@parking_lot.plate_number} with color #{@parking_lot.color} has been parked successfully."
+    else
+      redirect_to request.referrer, alert: "#{@parking_lot.plate_number} had already been parked."
+    end
   end
   def new_car_to_park
     @parking_lot = ParkingLot.find(ParkingLot.available_lot)

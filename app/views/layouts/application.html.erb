@@ -13,6 +13,9 @@
     <% if flash[:notice] %>
     <h3 style="background-color: green; color: #fff; padding: 5px;"><%= flash[:notice] %></h3>
     <% end %>
+    <% if flash[:alert] %>
+    <h3 style="background-color: red; color: #fff; padding: 5px;"><%= flash[:alert] %></h3>
+    <% end %>
     <%= yield %>
   </body>
 </html>
