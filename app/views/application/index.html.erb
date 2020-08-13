@@ -1,2 +1,2 @@
 <h1>Car Parking Lot</h1>
-<%= link_to 'New Parking Lot', new_parking_lot_path %>
+<%= link_to 'New Parking Lot', new_parking_lot_path if ParkingLot.all.size == 0 %>

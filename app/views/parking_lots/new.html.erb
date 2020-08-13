@@ -1,1 +1,7 @@
 <h1>New Parking Lot</h1>
+<%= form_tag parking_lots_path do %>
+<label >Total Parking Lots:</label>
+<%= number_field_tag 'total_parking_lots', '', required: true %>
+<br><br>
+<button type="submit">Create Parking Lot</button> 
+<% end %>
