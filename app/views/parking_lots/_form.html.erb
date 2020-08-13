@@ -1,0 +1,11 @@
+
+<%= form_for @parking_lot, url: parking_lot_path(@parking_lot) do |f| %>
+
+<%= f.label :plate_number %>
+<%= f.text_field :plate_number, required: true %>
+<br><br>
+<%= f.label :color %>
+<%= f.text_field :color, required: true %>
+<br><br>
+<%= f.submit 'Park Now' %>
+<% end %>

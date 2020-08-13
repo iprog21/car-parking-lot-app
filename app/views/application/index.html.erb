@@ -1,22 +1,7 @@
 <h1>Car Parking Lot</h1>
 <%= link_to 'New Parking Lot', new_parking_lot_path if ParkingLot.all.size == 0 %>
 <% if ParkingLot.all.size != 0 %>
-<table>
-  <thead>
-    <th>Slot Number</th>
-    <th>Plate Number</th>
-    <th>Color</th>
-    <th>Status</th>
-  </thead>
-  <tbody>
-    <% ParkingLot.all.each_with_index do |parking_lot, index| %>
-    <tr>
-      <td><%= index + 1 %></td>
-      <td><%= parking_lot.plate_number %></td>
-      <td><%= parking_lot.color %></td>
-      <td><%= parking_lot.available? ? 'Available' : 'Parked' %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'parking_lots' %>
+<br>
+<%= link_to 'New Car To Park', new_car_to_park_parking_lots_path %>
 <% end %>

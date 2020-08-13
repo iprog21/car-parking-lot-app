@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <th>Slot Number</th>
+    <th>Plate Number</th>
+    <th>Color</th>
+    <th>Status</th>
+  </thead>
+  <tbody>
+    <% ParkingLot.all.each_with_index do |parking_lot, index| %>
+    <tr>
+      <td><%= index + 1 %></td>
+      <td><%= parking_lot.plate_number %></td>
+      <td><%= parking_lot.color %></td>
+      <td><%= parking_lot.available? ? 'Available' : 'Parked' %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
