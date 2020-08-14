@@ -19,7 +19,7 @@
         <% end %>
       </td>
       <td>
-        <%= parking_lot.time_parked %>
+        <%= parking_lot.time_parked.strftime("%I:%M") if !parking_lot.time_parked.nil? %>
       </td>
     </tr>
     <% end %>

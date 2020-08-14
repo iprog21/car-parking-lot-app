@@ -15,6 +15,7 @@ class ParkingLotsController < ApplicationController
     @parking_lot = ParkingLot.find params[:id]
     @parking_lot.attributes = parking_lot_params
     @parking_lot.available = false
+    @parking_lot.time_parked = Time.now
     if @parking_lot.save
       redirect_to root_path, notice: "#{@parking_lot.plate_number} with color #{@parking_lot.color} has been parked successfully."
     else
@@ -35,6 +36,7 @@ class ParkingLotsController < ApplicationController
     plate_number = @parking_lot.plate_number
     @parking_lot.plate_number = @parking_lot.color = nil
     @parking_lot.available = true
+    @parking_lot.time_parked = nil
     @parking_lot.save(validate: false)
     redirect_to root_path, notice: "#{plate_number} has successfully leave and Parking Lot #{@parking_lot.id} is now available."
   end
