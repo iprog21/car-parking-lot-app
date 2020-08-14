@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_14_041235) do
+ActiveRecord::Schema.define(version: 2020_08_14_052411) do
+
+  create_table "parking_logs", force: :cascade do |t|
+    t.integer "parking_lot_id"
+    t.string "plate_number"
+    t.string "color"
+    t.datetime "entry"
+    t.datetime "departure"
+    t.decimal "hourly_rate", precision: 8, scale: 2, default: "0.0"
+    t.integer "grace_period"
+    t.decimal "amount_paid"
+    t.string "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parking_lot_id"], name: "index_parking_logs_on_parking_lot_id"
+  end
 
   create_table "parking_lots", force: :cascade do |t|
     t.string "plate_number"

@@ -9,4 +9,5 @@ Rails.application.routes.draw do
       get :new_car_to_park
     end
   end
+  resources :parking_logs
 end

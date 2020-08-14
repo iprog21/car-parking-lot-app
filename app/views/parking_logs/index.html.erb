@@ -1,0 +1,35 @@
+<h1>Car Parking Logs</h1>
+<table>
+  <thead>
+    <th>Parking Lot #</th>
+    <th>Plate Number</th>
+    <th>Color</th>
+    <th>Entry</th>
+    <th>Departure</th>
+    <th>Hourly Rate</th>
+    <th>Grace Period</th>
+    <th>Amount Paid</th>
+    <th>Notes</th>
+    <th>Date Created</th>
+  </thead>
+  <tbody>
+    <% @parking_logs.each do |log| %>
+    <tr>
+      <td><%= log.try(:parking_lot).id %></td>
+      <td><%= log.plate_number %></td>
+      <td><%= log.color %></td>
+      <td><%= log.entry %></td>
+      <td><%= log.departure %></td>
+      <td><%= log.hourly_rate %></td>
+      <td><%= log.grace_period %></td>
+      <td><%= log.amount_paid %></td>
+      <td><%= log.plate_number %></td>
+      <td><%= log.note %></td>
+      <td><%= log.created_at %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'Back To Parking Lots', root_path %>
