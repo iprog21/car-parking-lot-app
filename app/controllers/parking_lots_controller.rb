@@ -2,8 +2,11 @@ class ParkingLotsController < ApplicationController
   def new; end
   def create
     total_parking_lots = params[:total_parking_lots]
+    hourly_rate = params[:hourly_rate]
+    grace_period = params[:grace_period]
+
     for i in 1..total_parking_lots.to_i
-      parking_lot = ParkingLot.new
+      parking_lot = ParkingLot.new(hourly_rate: hourly_rate, grace_period: grace_period)
       parking_lot.save(validate: false)
     end
     redirect_to root_path, notice: "New Parking Lots Has Been Successfully Created"

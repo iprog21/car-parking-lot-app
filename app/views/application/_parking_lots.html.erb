@@ -3,7 +3,8 @@
     <th>Park Lot Number</th>
     <th>Plate Number</th>
     <th>Color</th>
-    <th>Status</th>
+    <th>Availability</th>
+    <th>Time Parked</th>
   </thead>
   <tbody>
     <% ParkingLot.all.each_with_index do |parking_lot, index| %>
@@ -16,6 +17,9 @@
         <% if !parking_lot.available? %>
           | <%= link_to 'Car Leave', leave_parking_lot_parking_lot_path(parking_lot), method: :post %>
         <% end %>
+      </td>
+      <td>
+        <%= parking_lot.time_parked %>
       </td>
     </tr>
     <% end %>

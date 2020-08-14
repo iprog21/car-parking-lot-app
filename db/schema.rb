@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_13_101258) do
+ActiveRecord::Schema.define(version: 2020_08_14_041235) do
 
   create_table "parking_lots", force: :cascade do |t|
     t.string "plate_number"
@@ -18,6 +18,9 @@ ActiveRecord::Schema.define(version: 2020_08_13_101258) do
     t.boolean "available", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "hourly_rate", precision: 8, scale: 2, default: "0.0"
+    t.integer "grace_period", default: 0
+    t.datetime "time_parked"
   end
 
 end

@@ -2,6 +2,12 @@
 <%= form_tag parking_lots_path do %>
 <label >Total Parking Lots:</label>
 <%= number_field_tag 'total_parking_lots', '', required: true %>
+<br>
+<label >Hourly Rate:</label>
+<%= number_field_tag 'hourly_rate', 0, required: true %>
+<br>
+<label >Grace Period(in minutes):</label>
+<%= number_field_tag 'grace_period', 0, required: true %>
 <br><br>
 <button type="submit">Create Parking Lot</button> 
 <% end %>
