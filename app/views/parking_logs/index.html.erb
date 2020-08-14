@@ -18,14 +18,13 @@
       <td><%= log.try(:parking_lot).id %></td>
       <td><%= log.plate_number %></td>
       <td><%= log.color %></td>
-      <td><%= log.entry %></td>
-      <td><%= log.departure %></td>
+      <td><%= log.entry.strftime("%I:%M") %></td>
+      <td><%= log.departure.strftime("%I:%M") %></td>
       <td><%= log.hourly_rate %></td>
-      <td><%= log.grace_period %></td>
+      <td><%= log.grace_period %> minutes</td>
       <td><%= log.amount_paid %></td>
-      <td><%= log.plate_number %></td>
-      <td><%= log.note %></td>
-      <td><%= log.created_at %></td>
+      <td><%= log.notes %></td>
+      <td><%= log.created_at.to_date %></td>
     </tr>
     <% end %>
   </tbody>

@@ -1,0 +1,45 @@
+<h1>Car Leave</h1>
+<table>
+  <tbody>
+    <tr>
+      <th>Parking Lot #:</th>
+      <td><%= @parking_lot.id %></td>
+    </tr>
+    <tr>
+      <th>Plate Number</th>
+      <td><%= @parking_lot.plate_number %></td>
+    </tr>
+    <tr>
+      <th>Color</th>
+      <td><%= @parking_lot.color %></td>
+    </tr>
+    <tr>
+      <th>Hourly Rate</th>
+      <td><%= @parking_lot.hourly_rate %></td>
+    </tr>
+    <tr>
+      <th>Grace Period</th>
+      <td><%= @parking_lot.grace_period %> minutes</td>
+    </tr>
+    <tr>
+      <th>Entry</th>
+      <td><%= @parking_lot.time_parked.strftime("%I:%M") %></td>
+    </tr>
+    <tr>
+      <th>Departure</th>
+      <td><%= Time.now.strftime("%I:%M") %></td>
+    </tr>
+    <tr>
+      <th>Amount To Be Paid</th>
+      <td><%= @parking_lot.amount_to_be_paid %></td>
+    </tr>
+    <tr>
+      <th>Action</th>
+      <td>
+        <%= link_to 'Leave Now', leave_parking_lot_parking_lot_path(@parking_lot), method: :post %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<%= link_to 'Back To Parking Lots', root_path %>

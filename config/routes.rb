@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'application#index'
   resources :parking_lots, only: [:new, :create, :update] do
     member do
+      get :leave_parking_lot
       post :leave_parking_lot
     end
     collection do

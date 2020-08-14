@@ -33,12 +33,35 @@ class ParkingLotsController < ApplicationController
   def leave_parking_lot
     
     @parking_lot = ParkingLot.find params[:id]
-    plate_number = @parking_lot.plate_number
-    @parking_lot.plate_number = @parking_lot.color = nil
-    @parking_lot.available = true
-    @parking_lot.time_parked = nil
-    @parking_lot.save(validate: false)
-    redirect_to root_path, notice: "#{plate_number} has successfully leave and Parking Lot #{@parking_lot.id} is now available."
+   
+    if request.post?
+      parking_log = ParkingLog.new
+      parking_log.parking_lot_id =  @parking_lot.id
+      parking_log.plate_number = @parking_lot.plate_number
+      parking_log.color = @parking_lot.color
+      parking_log.entry = @parking_lot.time_parked
+      parking_log.departure = Time.now
+      parking_log.hourly_rate = @parking_lot.hourly_rate
+      parking_log.grace_period = @parking_lot.grace_period
+      amount_to_pay =  @parking_lot.amount_to_be_paid
+      parking_log.amount_paid = amount_to_pay
+      notes = "Parking Lot #{@parking_lot.id} is free"
+      if amount_to_pay == 0
+        notes += " paid 0.0 (grace period)"
+      else
+        notes += " paid #{amount_to_pay}"
+      end
+      parking_log.notes = notes
+      parking_log.save(validate: false)
+      
+      plate_number = @parking_lot.plate_number
+      @parking_lot.plate_number = @parking_lot.color = nil
+      @parking_lot.available = true
+      @parking_lot.time_parked = nil
+      @parking_lot.save(validate: false)
+      redirect_to root_path, notice: notes
+    end
+
   end
   protected
   def parking_lot_params
